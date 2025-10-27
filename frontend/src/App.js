@@ -1,7 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useEffect, useState} from 'react'
 
 function App() {
+  const [message, setMessage] = useState('')
+  useEffect(()=>{
+    fetch('http://localhost:3001').then((res)=>{
+      if(!res.ok) throw new Error('Fetch Error.')
+      return
+    }).then((lambdaResponse)=>{
+      setMessage = lambdaResponse
+    }).catch((err)=>{
+      console.error('Error', err.message)
+    })
+  },[])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -15,7 +28,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React {message}
         </a>
       </header>
     </div>
