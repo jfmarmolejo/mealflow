@@ -5,11 +5,11 @@ import React, {useEffect, useState} from 'react'
 function App() {
   const [message, setMessage] = useState('')
   useEffect(()=>{
-    fetch('http://localhost:3001').then((res)=>{
+    fetch('http://localhost:3001/api').then((res)=>{
       if(!res.ok) throw new Error('Fetch Error.')
-      return
+      return res.json()
     }).then((lambdaResponse)=>{
-      setMessage = lambdaResponse
+      setMessage(lambdaResponse.payload)
     }).catch((err)=>{
       console.error('Error', err.message)
     })
@@ -28,7 +28,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React {message}
+          Learn React {message || 'Loading...'}
         </a>
       </header>
     </div>
