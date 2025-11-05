@@ -28,7 +28,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React {message || 'Loading...'}
+          {message || 'Loading...'}
         </a>
       </header>
     </div>
